@@ -80,7 +80,10 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
           notes="docs/releases/${TAG}.md"
-          if [ -f "$notes" ]; then
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            # The release page already exists (e.g. made on github.com): just attach the files.
+            gh release upload "$TAG" release/* --repo "$GITHUB_REPOSITORY" --clobber
+          elif [ -f "$notes" ]; then
             gh release create "$TAG" release/* --repo "$GITHUB_REPOSITORY" --title "MySafe $TAG" --notes-file "$notes"
           else
             gh release create "$TAG" release/* --repo "$GITHUB_REPOSITORY" --title "MySafe $TAG" --generate-notes
