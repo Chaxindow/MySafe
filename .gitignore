@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.spec
+
+# Local data — never commit a vault
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.mysafe-data/
+MySafe-data/
+*.mysafe
+*.mysafe.bak
+*.mysafe.before-sync
+*.mysafe.tmp
+*.mysafe.*.tmp
+*.mysafe.before-restore
+
+# Editors / OS
+.vscode/
+.idea/
+.vs/
+Thumbs.db
+.DS_Store
+
+# Dev helper output
+dev_run.log
+dev_test.log
+snapshots/
+.dev_request
+.dev_done
+.mysafe-usb/
+dev_run_usb.log
+
+# Local helper files (not part of the project)
+dev_watch.bat
+.dev_build
+CLAUDE.md
+docs/MANUAL_TEST.md

@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mysafe"
+version = "0.1.0"
+description = "A simple desktop app to keep all your account details in one place."
+readme = "README.md"
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6>=6.8",
+    "platformdirs>=4.0",
+    "cryptography>=44",  # AES-256-GCM + Argon2id
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-qt>=4.4",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+build = [
+    "pyinstaller>=6.10",
+]
+
+[project.scripts]
+mysafe = "mysafe.app:main"
+
+[tool.setuptools.packages.find]
+include = ["mysafe*"]
+
+[tool.setuptools.package-data]
+"mysafe.db.migrations" = ["*.sql"]
+"mysafe.resources" = ["*.svg", "*.png", "*.ico"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "S"]
+ignore = ["S101"]  # assert is fine in tests
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
